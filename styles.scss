@@ -5,11 +5,34 @@
 
 
 
+section {
 
+    position: relative;
+}
 
 .player {
 
     background-color: black;
     width: 4rem;
     height: 4rem;
+}
+
+.ground {
+
+    height: 3rem;
+    margin-top: 10rem;
+    
+    top: 100%;
+    background-color: darkslategrey;
+}
+
+
+.wall {
+
+    height:6rem;
+    width:6rem;
+    background-color: red;
+    //margin-left: 4rem;
+    margin-top: 46rem;
+    align-items: center;
 }
