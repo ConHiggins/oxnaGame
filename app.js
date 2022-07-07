@@ -7,7 +7,13 @@ let xVel = 0;
 let yVel = 0;
 const grav = 1;
 
+// const states = {
 
+//     idle:"idle",
+//     run,
+//     jump,
+//     fall,
+// }
 
 
 
@@ -15,9 +21,13 @@ const movePlayer = (xAccel, yAccel) => {
     
     xVel += xAccel;
     yVel += yAccel;
+
     hsp+=xVel;
-    vsp+=(yVel)
+    vsp+=(yVel);
+
     limitSpeed();
+
+
     player.style.left = (hsp + "px");
     player.style.top = (vsp + "px");
     console.log("xVel:" + xVel);
@@ -62,24 +72,33 @@ const slowPlayer = () => {
 
         xVel --;
     }
-    else if(xVel > 0) {
+    else if(xVel < 0) {
 
         xVel ++;
     }
+
+    hsp += xVel;
+
+    player.style.left = (hsp + "px");
 }
 
 document.addEventListener("keydown", (event) => {
 
 
-    console.log(event.code )
-    if(event.code == "KeyD") {
-       
-        movePlayer(4,0);
-    }
-    if(event.code == "KeyS") {
+    switch(true) {
 
-        movePlayer(0,1+yVel);
+        case event.code == "KeyD":
+            movePlayer(4,0);
+            break;
+        case event.code == "KeyA":
+            movePlayer(-4,0);
+            break;
+        case event.code == "KeyW":
+        movePlayer(4,0);
+        break;
     }
+
+
 })
 
 
