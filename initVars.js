@@ -10,4 +10,4 @@ export let vsp = 0;
 export let xVel = 0;
 export let yVel = 0;
 export let jumpSp = 0;
-export const grav = 0.5;
+export let grav = 0.5;

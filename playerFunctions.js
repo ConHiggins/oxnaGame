@@ -10,7 +10,7 @@ export let vsp = 0;
 export let xVel = 0;
 export let yVel = 0;
 export let jumpSp = 0;
-export const grav = body.offsetHeight*0.00075;
+export let grav = body.offsetHeight*0.00075;
 
 
 
@@ -47,14 +47,10 @@ export const movePlayer = (xAccel, yAccel) => {
       || (playerX >= (body.offsetWidth-player.offsetWidth) && xAccel > 0))
     { xAccel *= -10;}
 
-    if((playerY <= (player.offsetHeight*0.5) && yAccel < 0)
+    if((playerY <= 0 && yAccel < 0)
       || (playerY >= (body.offsetHeight-player.offsetHeight) && yAccel > 0))
-    { yAccel *= -10;}
+    { yAccel *= -100;}
 
-
-
-    // if(playerX >= (body.offsetWidth-player.offsetWidth) && xAccel > 0)
-    // { xAccel = -10;}
 ///Apply velocity to position
     xVel += xAccel;
     yVel += yAccel;
@@ -83,8 +79,17 @@ export const collisionSetPlayer = (x,y) => {
 
 export const gravity = () => {
 
-    ////Remove px from y position
+
+    ///Limit on-screen
     const yNumEnd = player.style.top.length-2;
+    const playerY = player.style.top.substring(0,yNumEnd);  
+
+    if((playerY <= 0)) {grav = 2;}
+    else if((playerY > body.offsetHeight)) { grav=-2;}
+    else {grav = 0.5;}
+
+    ////Remove px from y position
+    // const yNumEnd = player.style.top.length-2;
 
     if(player.style.top.substring(0,yNumEnd) < (window.innerHeight*0.6)) {
             yVel += grav;
@@ -117,6 +122,8 @@ export const limitSpeed = () => {
 export const slowPlayer = () => {
 
     if(xVel != 0) {xVel *= 0.99; }
+    if(yVel != 0) {yVel *= 0.995;}
+    if(jumpSp < -10) { jumpSp = -10; }
 
     hsp += Math.round(xVel);
     player.style.left = (hsp + "px");
