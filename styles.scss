@@ -35,6 +35,7 @@
     width:6rem;
     height:6rem;
     background-color: burlywood;
+    z-index: 40;
     
 }
 
@@ -42,7 +43,33 @@
 html, body { height: 100%; max-height: 900px;}
 body {
   background:radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #1b3d3f 100%);
+  
   overflow: hidden;
+}
+
+.game-container {
+
+    z-index: 2;
+    background:radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #f79424 100%);
+}
+
+.game-container::before {
+
+    position: absolute;
+    content: "";
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background:linear-gradient(to top, rgba(255,254,234,1) 0%, rgb(98, 51, 141) 35%, #0e0d33 100%);
+    z-index: 1;
+    transition: opacity 20s linear;
+    opacity: 0;
+
+}
+
+.game-container:hover::before {
+    opacity: 1;
 }
 
 .ocean { 
@@ -52,6 +79,7 @@ body {
   bottom:0;
   left:0;
   background: #015871;
+  z-index: 50;
 }
 
 .wave {

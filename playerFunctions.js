@@ -89,8 +89,6 @@ export const gravity = () => {
     else {grav = 0.5;}
 
     ////Remove px from y position
-    // const yNumEnd = player.style.top.length-2;
-
     if(player.style.top.substring(0,yNumEnd) < (window.innerHeight*0.6)) {
             yVel += grav;
             vsp+=yVel;

@@ -39,8 +39,8 @@ const floatItemX = (item,target,speed) => {
     let orbitRadius = body.offsetWidth;
     let date,rot;
 
-    date = Date.now() * speed; ////Delta I think? 
-    rot = target + Math.cos(date) * orbitRadius*0.5
+    date = Date.now() * speed; ////Delta 
+    rot = target + Math.sin(date) * orbitRadius*0.5
     item.style.webkitTransform = "rotate("+rot+"deg)";
     return (target + Math.cos(date) * orbitRadius) + "px";
     
@@ -48,16 +48,16 @@ const floatItemX = (item,target,speed) => {
 
 }
 
-////x-axis cosine movement function
+////y-axis cosine movement function
 
 const floatItemY = (item,target,speed) => {
 
     let orbitRadius = 50;
     let date;
 
-    date = Date.now() * speed; ////Delta I think? 
+    date = Date.now() * speed; ////Delta 
       
-    return (target + Math.cos(date) * orbitRadius) + "px";
+    return (target + Math.sin(date) * orbitRadius) + "px";
     
         
 
@@ -81,6 +81,7 @@ document.addEventListener("keydown", (event) => {
             event.preventDefault();
         case (event.code == "Space" && jumpSp > -10):
             event.preventDefault();
+            
             jumpSp-=2;
             console.log(jumpSp);
             break;

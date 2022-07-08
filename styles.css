@@ -24,6 +24,7 @@
   width: 6rem;
   height: 6rem;
   background-color: burlywood;
+  z-index: 40;
 }
 
 html, body {
@@ -36,6 +37,28 @@ body {
   overflow: hidden;
 }
 
+.game-container {
+  z-index: 2;
+  background: radial-gradient(ellipse at center, rgb(255, 254, 234) 0%, rgb(255, 254, 234) 35%, #f79424 100%);
+}
+
+.game-container::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgb(255, 254, 234) 0%, rgb(98, 51, 141) 35%, #0e0d33 100%);
+  z-index: 1;
+  transition: opacity 20s linear;
+  opacity: 0;
+}
+
+.game-container:hover::before {
+  opacity: 1;
+}
+
 .ocean {
   height: 30%;
   width: 100%;
@@ -43,6 +66,7 @@ body {
   bottom: 0;
   left: 0;
   background: #015871;
+  z-index: 50;
 }
 
 .wave {
