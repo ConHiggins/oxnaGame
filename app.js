@@ -1,70 +1,44 @@
-import {movePlayer, gravity, slowPlayer, playerJump, limitSpeed} from "./playerFunctions.js";
+import {movePlayer, gravity, slowPlayer, playerJump, limitSpeed, underwater, aboveWater} from "./playerFunctions.js";
+import {collisionCorrection, boxCollision} from "./collisions.js";
 
-let Game = {};
-const player = document.querySelector(".player");
-const ground = document.querySelector(".ground");
-const wall = document.querySelector(".wall");
+//import {player, body, ground, grav, wall, xVel, yVel, hsp, vsp, jumpSp} from "./initVars.js"
+
+export let Game = {};
+export const player = document.querySelector(".player");
+export const ground = document.querySelector(".ground");
+export const wall = document.querySelectorAll(".wall");
+export const body = document.querySelector("body");
+const wave = document.querySelector("#wave-1");
+
 player.style.position = "absolute";
-let hsp = 0;
-let vsp = 0;
-let xVel = 0;
-let yVel = 0;
-let jumpSp = 0;
-const grav = 1;
-const yNumEnd = player.style.top.length-2;
-const onGround = player.style.top.substring(0,yNumEnd) <= (window.innerHeight+(64));
-
+export let hsp = 0;
+export let vsp = 0;
+export let xVel = 0;
+export let yVel = 0;
+export let jumpSp = 0;
+export const grav = 1;
 
 const gameInit = () => {
     
 }
 
-
 gameInit();
-// const states = {
-
-//     idle:"idle",
-//     run,
-//     jump,
-//     fall,
-// }
-
-const boxCollision = (a,b) => {
-
-    const ax = a.getBoundingClientRect().left;
-    const bx = b.getBoundingClientRect().left;
-    const ay = a.getBoundingClientRect().top;
-    const by = b.getBoundingClientRect().top;
-
-    // console.log("ax"+ax);
-    // console.log("ar"+ (ax + a.offsetWidth));
-    // console.log("bx"+bx);
-    // console.log("br"+ (bx + b.offsetWidth));
-    
-
-    if((ax + a.offsetWidth >= bx &&
-        ax <= bx+b.offsetWidth) &&
-        (ay + a.offsetHeight >= by &&
-        ay <= by+b.offsetHeight))  {
-            console.log("collide!");
-            return true;
-        }
-    else { console.log("no");}
-
-}
 
 document.addEventListener("keydown", (event) => {
 
 
     switch(true) {
 
-        case event.code == "KeyD":
-            movePlayer(4,0);
+        case (event.code == "KeyD"):
+            movePlayer(2,0);
             break;
         case (event.code == "KeyA"):
-            movePlayer(-4,0);
+            movePlayer(-2,0);
             break;
+        case (event.code == "Space"):
+            event.preventDefault();
         case (event.code == "Space" && jumpSp > -25):
+            event.preventDefault();
             jumpSp-=2;
     }
 
@@ -74,7 +48,8 @@ document.addEventListener("keydown", (event) => {
 document.addEventListener("keyup", (event) => {
 
     switch(true){
-        case ((event.code == "Space") && (onGround==true)):
+        case ((event.code == "Space")):
+            event.preventDefault();
             playerJump(jumpSp);
             jumpSp = -8;
             break;
@@ -82,20 +57,21 @@ document.addEventListener("keyup", (event) => {
 })
 
 
-movePlayer(hsp,vsp);
+//movePlayer(hsp,vsp);
 
 
 /////Create game loop
+
+console.log("body width" + body.style.width);
 
 const tick = () => {
 
     window.requestAnimationFrame(tick);
     gravity();
     slowPlayer();
-    boxCollision(player,wall);
-    // console.log("on ground:" + onGround);
-    // console.log("jumpSp" + jumpSp);
-    // console.log("yVel:" + yVel);
+    if(boxCollision(player,wave)) { underwater(); }
+    else { aboveWater(); }
+    
 }
 
 tick();
