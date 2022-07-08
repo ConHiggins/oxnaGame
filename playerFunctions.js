@@ -116,7 +116,7 @@ export const limitSpeed = () => {
 
 export const slowPlayer = () => {
 
-    if(xVel != 0) {xVel *= 0.92; }
+    if(xVel != 0) {xVel *= 0.99; }
 
     hsp += Math.round(xVel);
     player.style.left = (hsp + "px");

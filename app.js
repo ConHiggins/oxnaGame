@@ -9,6 +9,8 @@ export const ground = document.querySelector(".ground");
 export const wall = document.querySelectorAll(".wall");
 export const body = document.querySelector("body");
 const wave = document.querySelector("#wave-1");
+const box =  document.querySelector(".box");
+
 
 player.style.position = "absolute";
 export let hsp = 0;
@@ -23,6 +25,42 @@ const gameInit = () => {
 }
 
 gameInit();
+
+
+
+////x-axis cosine movement function
+
+const floatItemX = (item,target,speed) => {
+
+    let orbitRadius = body.offsetWidth;
+    let date,rot;
+
+    date = Date.now() * speed; ////Delta I think? 
+    rot = target + Math.cos(date) * orbitRadius*0.5
+    item.style.webkitTransform = "rotate("+rot+"deg)";
+    return (target + Math.cos(date) * orbitRadius) + "px";
+    
+        
+
+}
+
+////x-axis cosine movement function
+
+const floatItemY = (item,target,speed) => {
+
+    let orbitRadius = 50;
+    let date;
+
+    date = Date.now() * speed; ////Delta I think? 
+      
+    return (target + Math.cos(date) * orbitRadius) + "px";
+    
+        
+
+}
+
+
+/////////Controls/////////////////////////////////////////////////////////////////////
 
 document.addEventListener("keydown", (event) => {
 
@@ -71,6 +109,10 @@ const tick = () => {
     slowPlayer();
     if(boxCollision(player,wave)) { underwater(); }
     else { aboveWater(); }
+
+    box.style.left = floatItemX(box, body.offsetWidth*0.5, 0.0002);
+    box.style.top = floatItemY(box, body.offsetHeight*0.475, 0.002);
+    
     
 }
 

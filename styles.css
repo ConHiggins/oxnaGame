@@ -10,8 +10,20 @@
   background-color: black;
   width: 4rem;
   height: 4rem;
+  border-radius: 50%;
   z-index: 0;
   transition: background-color 0.3s ease;
+}
+
+.floating-items {
+  grid-row: 5;
+}
+
+.box {
+  position: absolute;
+  width: 6rem;
+  height: 6rem;
+  background-color: burlywood;
 }
 
 html, body {
@@ -46,8 +58,8 @@ body {
 
 .wave:nth-of-type(2) {
   top: -175px;
-  -webkit-animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, swell 7s ease -1.25s infinite;
-          animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, swell 7s ease -1.25s infinite;
+  -webkit-animation: wave 4s cubic-bezier(0.36, 0.45, 0.53, 0.53) -0.125s infinite, swell 5s ease -1.25s infinite;
+          animation: wave 4s cubic-bezier(0.36, 0.45, 0.53, 0.53) -0.125s infinite, swell 5s ease -1.25s infinite;
   opacity: 1;
 }
 

@@ -36,7 +36,7 @@ export const boxCollision = (a,b) => {
         (ay + a.offsetHeight >= by &&
         ay <= by+b.offsetHeight))  {
 
-            console.log("collide!");
+            //console.log("collide!");
             return true;  
         }
     else { return false}
