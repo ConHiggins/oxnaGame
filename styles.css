@@ -6,6 +6,46 @@
   height: 100%;
 }
 
+.HUD {
+  width: 100%;
+  font-size: 4rem;
+  color: #ffe571;
+  z-index: 99;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.star {
+  position: relative;
+  margin: 1rem auto;
+  height: 4rem;
+  width: 4rem;
+  font-size: 12em;
+  z-index: 10;
+  align-content: center;
+}
+
+.star:before {
+  content: "";
+  position: absolute;
+  z-index: 99;
+  background: #ffe571;
+  width: 2rem;
+  height: 2.15rem;
+  transform: rotate(-45deg) skewX(22.5deg) skewY(22.5deg);
+  transition: background 0.3s ease;
+}
+
+.star:after {
+  content: "";
+  position: absolute;
+  z-index: 99;
+  background: #ffe571;
+  width: 2rem;
+  height: 2.15rem;
+  transform: rotate(45deg) skewX(22.5deg) skewY(22.5deg);
+  transition: background 0.3s ease;
+}
+
 .player {
   background-color: black;
   width: 4rem;

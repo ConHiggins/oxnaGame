@@ -52,7 +52,7 @@ export const movePlayer = (xAccel, yAccel) => {
     { yAccel *= -100;}
 
 ///Apply velocity to position
-    xVel += xAccel;
+    xVel += xAccel; 
     yVel += yAccel;
 
     rotatePlayer(xVel);
