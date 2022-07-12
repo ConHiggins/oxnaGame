@@ -18,6 +18,7 @@ import {
   wave,
   ocean,
   box,
+  shark,
   stars,
   menu,
   startButton,
@@ -109,13 +110,15 @@ const dropStars = (arr) => {
 
 ////x-axis cosine movement function
 
-const floatItemX = (item, target, speed) => {
+const floatItemX = (item, target, speed, rotate) => {
   let orbitRadius = body.offsetWidth;
   let date, rot;
 
   date = Date.now() * speed; ////Delta
-  rot = target + Math.sin(date) * orbitRadius * 0.5;
-  item.style.webkitTransform = "rotate(" + rot + "deg)";
+  if ((rotate = true)) {
+    rot = target + Math.sin(date) * orbitRadius * 0.5;
+    item.style.webkitTransform = "rotate(" + rot + "deg)";
+  }
   return target + Math.cos(date) * orbitRadius + "px";
 };
 
@@ -215,7 +218,7 @@ const tick = () => {
     gameInit();
   }
 
-  box.style.left = floatItemX(box, body.offsetWidth * 0.5, 0.0002);
+  box.style.left = floatItemX(box, body.offsetWidth * 0.5, 0.0002, true);
   box.style.top = floatItemY(box, body.offsetHeight * 0.475, 0.002);
 
   dropStars(stars);

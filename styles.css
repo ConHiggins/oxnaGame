@@ -17,12 +17,21 @@
   }
   .menu__title {
     font-size: 4rem;
+    color: white;
   }
   .menu__start-button {
     width: 19rem;
     height: 5rem;
     font-size: 2rem;
     left: 40%;
+    background-color: #0e0d33;
+    color: white;
+    border: none;
+    border-radius: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  .menu__start-button:hover {
+    background-color: #015871;
   }
   .HUD {
     position: absolute;

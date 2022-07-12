@@ -31,6 +31,8 @@ export const rotatePlayer = (numDeg) => {
   return (player.style.webkitTransform = "rotate(" + numDeg + "deg)");
 };
 
+////////////////////////////////////////////////////////////////////////////////////////
+
 const stayOnscreen = (xAccel, yAccel) => {
   const xNumEnd = player.style.left.length - 2;
   const playerX = player.style.left.substring(0, xNumEnd);
@@ -52,6 +54,7 @@ const stayOnscreen = (xAccel, yAccel) => {
     return (game.yVel *= -1);
   }
 };
+////////////////////////////////////////////////////////////////////////////////////////
 
 export const movePlayer = (xAccel, yAccel) => {
   ///Apply velocity to position
@@ -70,7 +73,7 @@ export const movePlayer = (xAccel, yAccel) => {
   player.style.left = game.hsp + "px";
   player.style.top = game.vsp + "px";
 };
-
+////////////////////////////////////////////////////////////////////////////////////////
 export const collisionSetPlayer = (x, y) => {
   game.hsp = x;
   game.vsp = y;
@@ -78,7 +81,7 @@ export const collisionSetPlayer = (x, y) => {
   player.style.left = game.hsp + "px";
   player.style.top = game.vsp + "px";
 };
-
+////////////////////////////////////////////////////////////////////////////////////////
 export const gravity = () => {
   ///Limit on-screen
   const yNumEnd = player.style.top.length - 2;
@@ -101,7 +104,7 @@ export const gravity = () => {
   game.vsp += game.yVel;
   player.style.top = game.vsp + "px";
 };
-
+////////////////////////////////////////////////////////////////////////////////////////
 export const setSpeed = (vel, max) => {
   if (vel >= max) {
     return (vel = max);
@@ -109,7 +112,7 @@ export const setSpeed = (vel, max) => {
     return (vel = -max);
   }
 };
-
+////////////////////////////////////////////////////////////////////////////////////////
 export const limitSpeed = () => {
   const xMaxSpd = 10;
   const yMaxSpd = 10;
@@ -117,7 +120,7 @@ export const limitSpeed = () => {
   setSpeed(game.xVel, xMaxSpd);
   setSpeed(game.yVel, yMaxSpd);
 };
-
+////////////////////////////////////////////////////////////////////////////////////////
 export const slowPlayer = () => {
   if (game.xVel != 0) {
     game.xVel *= 0.99;
@@ -131,7 +134,7 @@ export const slowPlayer = () => {
   game.hsp += Math.round(game.xVel);
   player.style.left = game.hsp + "px";
 };
-
+////////////////////////////////////////////////////////////////////////////////////////
 export const playerJump = (yAccel) => {
   game.yVel += yAccel;
   game.vsp += game.yVel;
