@@ -32,20 +32,36 @@ let multiplier = 1;
 let KeyD = false;
 let KeyA = false;
 
+body.addEventListener("mousedown", (e) => {
+  const center = window.innerWidth * 0.5;
+  if (e.clientX > center) {
+    KeyD = true;
+  } else {
+    KeyA = true;
+  }
+});
+
+body.addEventListener("mouseup", (e) => {
+  KeyA = false;
+  KeyD = false;
+});
+
 startButton.addEventListener("click", () => {
-  gameInit();
+  paused = false;
   tick();
   menu.style.opacity = 0;
   menu.style.display = "none";
 });
 
 export const gameInit = () => {
+  paused = true;
+  menu.style.opacity = 1;
+  menu.style.display = "block";
   game.xVel = 0;
   game.yVel = 0;
   game.hsp = body.offsetWidth * 0.5;
   game.vsp = 0;
-  movePlayer(0, 0);
-  player.style.left = body.offsetWidth * 0.5 + "px";
+  player.style.left = game.hsp + "px";
   player.style.top = "0px";
   score = 0;
   for (let i = 0; i < stars.length; i++) {
@@ -192,6 +208,10 @@ const tick = () => {
     underwater();
   } else {
     aboveWater();
+  }
+
+  if (boxCollision(player, box)) {
+    gameInit();
   }
 
   box.style.left = floatItemX(box, body.offsetWidth * 0.5, 0.0002);

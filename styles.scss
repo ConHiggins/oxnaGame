@@ -20,17 +20,25 @@
 
   position: absolute;
   top: 50%;
-  left: 30%;
+  left: 10%;
   z-index: 99;
   opacity: 1;
   transition: opacity 0.3s ease;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif ;
 }
 
+.menu__title {
+
+  font-size: 4rem;
+}
 
 .menu__start-button { 
 
-  width: 10rem;
+  width: 19rem;
   height: 5rem;
+  font-size: 2rem;
+  left: 40%;
+
 }
 
 .HUD {
@@ -199,9 +207,11 @@ body {
   
   .menu {
   
+    display: flex;
+    align-items: center ;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 40%;
     z-index: 99;
     opacity: 1;
     transition: opacity 0.3s ease;
@@ -210,8 +220,11 @@ body {
   
   .menu__start-button { 
   
-    width: 10rem;
+    
+    width: 19rem;
     height: 5rem;
+    left:60%;
+    
   }
   
   .HUD {

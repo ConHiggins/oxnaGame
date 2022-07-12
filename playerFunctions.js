@@ -47,7 +47,7 @@ const stayOnscreen = (xAccel, yAccel) => {
 
   if (
     (playerY <= 0 && yAccel < 0) ||
-    (playerY >= body.offsetHeight + player.offsetHeight && yAccel > 0)
+    (playerY >= body.offsetHeight + player.offsetHeight * 10 && yAccel > 0)
   ) {
     return (game.yVel *= -1);
   }
@@ -111,8 +111,8 @@ export const setSpeed = (vel, max) => {
 };
 
 export const limitSpeed = () => {
-  const xMaxSpd = 15;
-  const yMaxSpd = 15 + game.grav;
+  const xMaxSpd = 10;
+  const yMaxSpd = 10;
 
   setSpeed(game.xVel, xMaxSpd);
   setSpeed(game.yVel, yMaxSpd);
