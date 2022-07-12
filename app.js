@@ -131,7 +131,7 @@ const floatItemY = (item, target, speed) => {
 body.addEventListener("touchstart", (e) => {
   const center = window.innerWidth * 0.5;
   e.preventDefault();
-  if (e.clientX > center) {
+  if (e.pageX > center) {
     KeyD = true;
   } else {
     KeyA = true;
@@ -204,10 +204,10 @@ const boxControl = () => {
   if (boxCount < 1 && score >= 10) {
     addHazard();
   }
-  if (boxCount == 1 && score >= 30) {
+  if (boxCount == 1 && score >= 50) {
     addHazard();
   }
-  if (boxCount == 2 && score >= 50) {
+  if (boxCount == 2 && score >= 100) {
     addHazard();
   }
 

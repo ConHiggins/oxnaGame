@@ -38,7 +38,7 @@ const stayOnscreen = (xAccel, yAccel) => {
     (playerY <= 0 && yAccel < 0) ||
     (playerY >= body.offsetHeight + player.offsetHeight * 10 && yAccel > 0)
   ) {
-    return (game.yVel *= -1);
+    return (game.yVel *= -0.1);
   }
 };
 ////////////////////////////////////////////////////////////////////////////////////////
