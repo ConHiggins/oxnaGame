@@ -31,6 +31,7 @@
 
   font-size: 4rem;
   color: white;
+  text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
 }
 
 .menu__instructions {
@@ -65,6 +66,16 @@
   z-index: 99;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
+}
+
+.points {
+
+  position: absolute;
+  font-size: 2rem;
+  color:#ffe571;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+   z-index: 99;
 }
 
 .star {
@@ -121,6 +132,66 @@
     grid-row: 5;
 }
 
+ .box {
+  background: #c93510;
+  width: 2.5rem;
+  height: 2.5rem;
+  position: absolute;
+  text-align: center;
+  top: 0.625rem;
+  left: 0.625rem;
+  z-index: 10;
+}
+.box:before,
+.box:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 2.5rem;
+  width: 2.5rem;
+  background: #c93510;
+}
+.box:before {
+  -webkit-transform: rotate(30deg);
+  -moz-transform: rotate(30deg);
+  -ms-transform: rotate(30deg);
+  -o-transform: rotate(30deg);
+}
+.box:after {
+  -webkit-transform: rotate(60deg);
+  -moz-transform: rotate(60deg);
+  -ms-transform: rotate(60deg);
+  -o-transform: rotate(60deg);
+}
+
+#box_2 {
+
+  background: #0e0d33;
+  height: 3.5rem;
+  width: 3.5rem;
+}
+#box_2:after,
+#box_2::before {
+
+  background: #0e0d33;
+  height: 3.5rem;
+  width: 3.5rem;  
+}
+
+  
+#box_3 {
+
+  background: #1b3d3f;
+  height: 5rem;
+  width: 5rem;
+}
+#box_3:after,
+#box_3:before {
+  background: #1b3d3f;
+  height: 5rem;
+  width: 5rem;
+}
 
 
 html, body { height: 100%; max-height: 900px;}
@@ -151,9 +222,7 @@ body {
 
 }
 
-.game-container:hover::before {
-    
-}
+
 
 .ocean { 
   height: 30%;

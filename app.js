@@ -33,9 +33,9 @@ let score = 0;
 let multiplier = 1;
 let KeyD = false;
 let KeyA = false;
-const boxes = [true, false, false];
+
 const gameCont = document.querySelector(".game-container");
-const gameContBefore = window.getComputedStyle(gameCont, "::before");
+const points = document.querySelector(".points");
 let boxCount = 0;
 
 const addHazard = () => {
@@ -46,11 +46,12 @@ const addHazard = () => {
 const removeHazards = () => {
   for (let i = 0; i < boxCount; i++) {
     floatingItems.innerHTML -= `<div class="box" id="box_${boxCount}"></div>`;
+    floatingItems.innerHTML -= `NaN`;
   }
   boxCount = 0;
 };
 
-export const gameInit = () => {
+const gameInit = () => {
   paused = true;
   menu.style.opacity = 1;
   menu.style.display = "block";
@@ -200,7 +201,11 @@ document.addEventListener("keyup", (event) => {
 
 const scoreAdd = () => {
   multiplier = 1 + Math.floor(score * 0.1);
-  score += 1 * multiplier;
+  score += multiplier;
+  points.style.opacity = 1;
+  points.style.left = game.hsp + "px";
+  points.style.top = game.vsp + "px";
+  points.innerText = `+${multiplier}`;
 };
 
 const boxControl = () => {
@@ -268,6 +273,7 @@ const tick = () => {
     movePlayer(-0.5, 0);
   }
 
+  points.style.opacity *= 0.95;
   gravity();
   slowPlayer();
   if (boxCollision(player, ocean) || boxCollision(player, wave)) {

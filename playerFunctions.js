@@ -2,8 +2,8 @@ player.style.position = "absolute";
 
 import { player, body, wave, game } from "./initVars.js";
 
-import { collisionCorrection, boxCollision } from "./collisions.js";
-import { gameInit } from "./app.js";
+// import { collisionCorrection, boxCollision } from "./collisions.js";
+// import { gameInit } from "./app.js";
 
 export const underwater = () => {
   player.style.backgroundColor = "#1b3d3f";
