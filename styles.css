@@ -43,6 +43,7 @@
     color: #ffe571;
     z-index: 99;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    text-shadow: -4px 0 black, 0 4px black, 4px 0 black, 0 -4px black;
   }
   .star {
     position: relative;
@@ -109,10 +110,7 @@
     background: linear-gradient(to top, rgb(255, 254, 234) 0%, rgb(98, 51, 141) 35%, #0e0d33 100%);
     z-index: 1;
     transition: opacity 20s linear;
-    opacity: 0;
-  }
-  .game-container:hover::before {
-    opacity: 1;
+    opacity: var(--op, 0);
   }
   .ocean {
     height: 30%;
@@ -127,7 +125,7 @@
     background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x;
     position: absolute;
     top: -188px;
-    width: 6400px;
+    width: 2400px;
     height: 298px;
     -webkit-animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
             animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
@@ -327,10 +325,7 @@
     background: linear-gradient(to top, rgb(255, 254, 234) 0%, rgb(98, 51, 141) 35%, #0e0d33 100%);
     z-index: 1;
     transition: opacity 20s linear;
-    opacity: 0;
-  }
-  .game-container:hover::before {
-    opacity: 1;
+    opacity: var(--op, 0);
   }
   .ocean {
     height: 30%;

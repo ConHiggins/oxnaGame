@@ -27,12 +27,15 @@ import {
 
 export let Game = {};
 let paused = false;
+let day = true;
 let reset = false;
 let score = 0;
 let multiplier = 1;
 let KeyD = false;
 let KeyA = false;
 const boxes = [true, false, false];
+const gameCont = document.querySelector(".game-container");
+const gameContBefore = window.getComputedStyle(gameCont, "::before");
 let boxCount = 0;
 
 const addHazard = () => {
@@ -237,6 +240,20 @@ const boxControl = () => {
     }
   }
 };
+
+const dayNight = () => {
+  if (day == true) {
+    console.log("sunset");
+    gameCont.style.setProperty("--op", "1");
+    day = false;
+  } else if (day == false) {
+    console.log("sunrise");
+    gameCont.style.setProperty("--op", "0");
+    day = true;
+  }
+};
+
+setInterval(dayNight, 40000);
 
 /////Create game loop
 const tick = () => {
