@@ -1,6 +1,8 @@
 
 
 
+@media screen and (min-width: 320px) {
+  
 
 
 
@@ -14,10 +16,28 @@
     
 }
 
+.menu {
+
+  position: absolute;
+  top: 50%;
+  left: 30%;
+  z-index: 99;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+
+.menu__start-button { 
+
+  width: 10rem;
+  height: 5rem;
+}
+
 .HUD {
 
+  position: absolute;
   width: 100%;
-  font-size: 4rem;
+  font-size: 2rem;
   color:#ffe571;
   z-index: 99;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -26,11 +46,12 @@
 .star {
   position:relative;
   margin:1rem auto;
-  height:4rem;
-  width:4rem;
+  height:2rem;
+  width:2rem;
   font-size:12em;
   z-index: 10;
   align-content: center;
+  transition: opacity 0.3s ease;
   
 }
 
@@ -39,10 +60,10 @@
   position:absolute;
   z-index: 99;
   background: #ffe571;
-  width:2rem;
-  height:2.15rem;
+  width:1rem;
+  height:1.15rem;
   transform:rotate(-45deg) skewX(22.5deg) skewY(22.5deg);
-  transition: background 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .star:after{
@@ -50,21 +71,23 @@
   position:absolute;
   z-index: 99;
   background:#ffe571;
-  width:2rem;
-  height:2.15rem;
+  width:1rem;
+  height:1.15rem;
   transform:rotate(45deg) skewX(22.5deg) skewY(22.5deg);
-  transition: background 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 
 .player {
 
+    position: absolute;
     background-color: black;
-    width: 4rem;
-    height: 4rem;
+    width: 2rem;
+    height: 2rem;
     border-radius: 50%;
     z-index: 99;
     transition: background-color 0.3s ease;
+    border: 0px solid white;
 }
 
 .floating-items {
@@ -73,8 +96,8 @@
 }
 .box {
     position: absolute;
-    width:6rem;
-    height:6rem;
+    width:3rem;
+    height:3rem;
     background-color: burlywood;
     z-index: 40;
     
@@ -156,3 +179,185 @@ body {
     transform: translate3d(0,5px,0);
   }
 }
+
+}
+
+@media screen and (min-width: 1024px) {
+  
+
+
+
+  .game-container {
+  
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr ;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+      width: 100%; 
+      height: 100%;
+      
+  }
+  
+  .menu {
+  
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 99;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  
+  
+  .menu__start-button { 
+  
+    width: 10rem;
+    height: 5rem;
+  }
+  
+  .HUD {
+  
+    position: absolute;
+    width: 100%;
+    font-size: 4rem;
+    color:#ffe571;
+    z-index: 99;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
+  
+  .star {
+    position:relative;
+    margin:1rem auto;
+    height:4rem;
+    width:4rem;
+    font-size:12em;
+    z-index: 10;
+    align-content: center;
+    
+  }
+  
+  .star:before{
+    content:"";
+    position:absolute;
+    z-index: 99;
+    background: #ffe571;
+    width:2rem;
+    height:2.15rem;
+    transform:rotate(-45deg) skewX(22.5deg) skewY(22.5deg);
+    transition: background 0.3s ease;
+  }
+  
+  .star:after{
+    content:"";
+    position:absolute;
+    z-index: 99;
+    background:#ffe571;
+    width:2rem;
+    height:2.15rem;
+    transform:rotate(45deg) skewX(22.5deg) skewY(22.5deg);
+    transition: background 0.3s ease;
+  }
+  
+  
+  .player {
+  
+      position: absolute;
+      background-color: black;
+      width: 4rem;
+      height: 4rem;
+      border-radius: 50%;
+      z-index: 99;
+      transition: background-color 0.3s ease;
+      border: 0px solid white;
+  }
+  
+  .floating-items {
+  
+      grid-row: 5;
+  }
+  .box {
+      position: absolute;
+      width:6rem;
+      height:6rem;
+      background-color: burlywood;
+      z-index: 40;
+      
+  }
+  
+  
+  html, body { height: 100%; max-height: 900px;}
+  body {
+    background:radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #1b3d3f 100%);
+    
+    overflow: hidden;
+  }
+  
+  .game-container {
+  
+      z-index: 2;
+      background:radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #f79424 100%);
+  }
+  
+  .game-container::before {
+  
+      position: absolute;
+      content: "";
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      background:linear-gradient(to top, rgba(255,254,234,1) 0%, rgb(98, 51, 141) 35%, #0e0d33 100%);
+      z-index: 1;
+      transition: opacity 20s linear;
+      opacity: 0;
+  
+  }
+  
+  .game-container:hover::before {
+      opacity: 1;
+  }
+  
+  .ocean { 
+    height: 30%;
+    width:100%;
+    position:absolute;
+    bottom:0;
+    left:0;
+    background: #015871;
+    z-index: 50;
+  }
+  
+  .wave {
+    background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x; 
+    position: absolute;
+    top: -188px;
+    width: 6400px;
+    height:298px;
+    animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) infinite;
+    transform: translate3d(0, 0, 0);
+  }
+  
+  .wave:nth-of-type(2) {
+    top: -175px;
+    animation: wave 4s cubic-bezier( 0.36, 0.45, 0.53, 0.53) -.125s infinite, swell 5s ease -1.25s infinite;
+    opacity: 1;
+  }
+  
+  @keyframes wave {
+    0% {
+      margin-left: 0;
+    }
+    100% {
+      margin-left: -1600px;
+    }
+  }
+  
+  @keyframes swell {
+    0%, 100% {
+      transform: translate3d(0,-25px,0);
+    }
+    50% {
+      transform: translate3d(0,5px,0);
+    }
+  }
+  
+  }
