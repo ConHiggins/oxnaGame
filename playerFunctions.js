@@ -1,19 +1,19 @@
-//export let Game = {};
-export const player = document.querySelector(".player");
-export const ground = document.querySelector(".ground");
-export const wall = document.querySelectorAll(".wall");
-export const body = document.querySelector("body");
-const wave = document.querySelector("#wave-1");
-const ocean = document.querySelector(".ocean");
-
 player.style.position = "absolute";
 
-export let jumpSp = 0;
-export let grav = body.offsetHeight * 0.00075;
-
-import { game } from "./initVars.js";
-
-//import {player, body, ground, wall, game.xVel, game.yVel, game.hsp, game.vsp, jumpSp} from "./initVars.js"
+import {
+  HUD,
+  player,
+  body,
+  ground,
+  grav,
+  wave,
+  ocean,
+  box,
+  stars,
+  menu,
+  startButton,
+  game,
+} from "./initVars.js";
 
 import { collisionCorrection, boxCollision } from "./collisions.js";
 import { gameInit } from "./app.js";
@@ -85,16 +85,16 @@ export const gravity = () => {
   const playerY = player.style.top.substring(0, yNumEnd);
 
   if (playerY <= 0) {
-    grav = 2;
+    game.grav = 2;
   } else if (playerY > body.offsetHeight + wave.offsetHeight * 2) {
-    grav = -2;
+    game.grav = -2;
   } else {
-    grav = 0.5;
+    game.grav = 0.5;
   }
 
   ////Remove px from y position
   if (player.style.top.substring(0, yNumEnd) < window.innerHeight * 0.6) {
-    game.yVel += grav;
+    game.yVel += game.grav;
   } else {
     game.yVel -= 1;
   }
@@ -112,7 +112,7 @@ export const setSpeed = (vel, max) => {
 
 export const limitSpeed = () => {
   const xMaxSpd = 15;
-  const yMaxSpd = 15 + grav;
+  const yMaxSpd = 15 + game.grav;
 
   setSpeed(game.xVel, xMaxSpd);
   setSpeed(game.yVel, yMaxSpd);
@@ -124,9 +124,6 @@ export const slowPlayer = () => {
   }
   if (game.yVel != 0) {
     game.yVel *= 0.995;
-  }
-  if (jumpSp < -10) {
-    jumpSp = -10;
   }
 
   stayOnscreen(game.xVel, game.yVel);
@@ -141,5 +138,4 @@ export const playerJump = (yAccel) => {
 
   player.style.left = game.hsp + "px";
   player.style.top = game.vsp + "px";
-  //jumpSp = 0;
 };
