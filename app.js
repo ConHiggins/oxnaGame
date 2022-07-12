@@ -32,7 +32,7 @@ let multiplier = 1;
 let KeyD = false;
 let KeyA = false;
 
-body.addEventListener("mousedown", (e) => {
+body.addEventListener("touchstart", (e) => {
   const center = window.innerWidth * 0.5;
   e.preventDefault();
   if (e.clientX > center) {
@@ -42,7 +42,7 @@ body.addEventListener("mousedown", (e) => {
   }
 });
 
-body.addEventListener("mouseup", (e) => {
+body.addEventListener("touchend", (e) => {
   KeyA = false;
   KeyD = false;
 });
