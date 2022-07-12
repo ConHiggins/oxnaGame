@@ -1,19 +1,6 @@
 player.style.position = "absolute";
 
-import {
-  HUD,
-  player,
-  body,
-  ground,
-  grav,
-  wave,
-  ocean,
-  box,
-  stars,
-  menu,
-  startButton,
-  game,
-} from "./initVars.js";
+import { player, body, wave, game } from "./initVars.js";
 
 import { collisionCorrection, boxCollision } from "./collisions.js";
 import { gameInit } from "./app.js";
@@ -92,7 +79,7 @@ export const gravity = () => {
   } else if (playerY > body.offsetHeight + wave.offsetHeight * 2) {
     game.grav = -2;
   } else {
-    game.grav = 0.5;
+    game.grav = body.offsetHeight * 0.00075;
   }
 
   ////Remove px from y position
@@ -114,8 +101,8 @@ export const setSpeed = (vel, max) => {
 };
 ////////////////////////////////////////////////////////////////////////////////////////
 export const limitSpeed = () => {
-  const xMaxSpd = 10;
-  const yMaxSpd = 10;
+  const xMaxSpd = 1;
+  const yMaxSpd = 1;
 
   setSpeed(game.xVel, xMaxSpd);
   setSpeed(game.yVel, yMaxSpd);

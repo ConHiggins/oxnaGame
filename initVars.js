@@ -5,7 +5,8 @@ export const ground = document.querySelector(".ground");
 export const body = document.querySelector("body");
 export const wave = document.querySelector("#wave-1");
 export const ocean = document.querySelector(".ocean");
-export const box = document.querySelector(".box");
+export const floatingItems = document.querySelector(".floating-items");
+
 export const shark = document.querySelector(".shark");
 export const stars = Array.from(document.getElementsByClassName("star"));
 

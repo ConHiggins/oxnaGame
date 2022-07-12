@@ -17,7 +17,7 @@ import {
   grav,
   wave,
   ocean,
-  box,
+  floatingItems,
   shark,
   stars,
   menu,
@@ -32,33 +32,26 @@ let score = 0;
 let multiplier = 1;
 let KeyD = false;
 let KeyA = false;
+const boxes = [true, false, false];
+let boxCount = 0;
 
-body.addEventListener("touchstart", (e) => {
-  const center = window.innerWidth * 0.5;
-  e.preventDefault();
-  if (e.clientX > center) {
-    KeyD = true;
-  } else {
-    KeyA = true;
+const addHazard = () => {
+  boxCount += 1;
+  floatingItems.innerHTML += `<div class="box" id="box_${boxCount}"></div>`;
+};
+
+const removeHazards = () => {
+  for (let i = 0; i < boxCount; i++) {
+    floatingItems.innerHTML -= `<div class="box" id="box_${boxCount}"></div>`;
   }
-});
-
-body.addEventListener("touchend", (e) => {
-  KeyA = false;
-  KeyD = false;
-});
-
-startButton.addEventListener("click", () => {
-  paused = false;
-  tick();
-  menu.style.opacity = 0;
-  menu.style.display = "none";
-});
+  boxCount = 0;
+};
 
 export const gameInit = () => {
   paused = true;
   menu.style.opacity = 1;
   menu.style.display = "block";
+  removeHazards();
   game.xVel = 0;
   game.yVel = 0;
   game.hsp = body.offsetWidth * 0.5;
@@ -135,6 +128,21 @@ const floatItemY = (item, target, speed) => {
 
 /////////Controls/////////////////////////////////////////////////////////////////////
 
+body.addEventListener("touchstart", (e) => {
+  const center = window.innerWidth * 0.5;
+  e.preventDefault();
+  if (e.clientX > center) {
+    KeyD = true;
+  } else {
+    KeyA = true;
+  }
+});
+
+body.addEventListener("touchend", (e) => {
+  KeyA = false;
+  KeyD = false;
+});
+
 document.addEventListener("keydown", (event) => {
   switch (true) {
     case event.code == "KeyR":
@@ -162,6 +170,8 @@ document.addEventListener("keydown", (event) => {
       paused = false;
       tick();
       break;
+    case event.code == "KeyL":
+      addHazard();
   }
 });
 
@@ -190,10 +200,45 @@ const scoreAdd = () => {
   score += 1 * multiplier;
 };
 
+const boxControl = () => {
+  if (boxCount < 1 && score >= 10) {
+    addHazard();
+  }
+  if (boxCount == 1 && score >= 30) {
+    addHazard();
+  }
+  if (boxCount == 2 && score >= 50) {
+    addHazard();
+  }
+
+  if (boxCount >= 1) {
+    let box_1 = document.querySelector("#box_1");
+    box_1.style.left = floatItemX(box_1, body.offsetWidth * 0.5, 0.0004, true);
+    box_1.style.top = floatItemY(box_1, body.offsetHeight * 0.475, 0.002);
+    if (boxCollision(player, box_1)) {
+      gameInit();
+    }
+  }
+
+  if (boxCount > 1) {
+    let box_2 = document.querySelector("#box_2");
+    box_2.style.left = floatItemX(box_2, body.offsetWidth * 0.5, 0.0003, true);
+    box_2.style.top = floatItemY(box_2, body.offsetHeight * 0.475, 0.003);
+    if (boxCollision(player, box_2)) {
+      gameInit();
+    }
+  }
+  if (boxCount > 2) {
+    let box_3 = document.querySelector("#box_3");
+    box_3.style.left = floatItemX(box_3, body.offsetWidth * 0.5, 0.0002, true);
+    box_3.style.top = floatItemY(box_3, body.offsetHeight * 0.475, 0.006);
+    if (boxCollision(player, box_3)) {
+      gameInit();
+    }
+  }
+};
+
 /////Create game loop
-
-console.log("body width" + body.offsetWidth);
-
 const tick = () => {
   if (paused == false) {
     window.requestAnimationFrame(tick);
@@ -214,16 +259,15 @@ const tick = () => {
     aboveWater();
   }
 
-  if (boxCollision(player, box)) {
-    gameInit();
-  }
-
-  box.style.left = floatItemX(box, body.offsetWidth * 0.5, 0.0002, true);
-  box.style.top = floatItemY(box, body.offsetHeight * 0.475, 0.002);
-
   dropStars(stars);
+  boxControl();
 
   showHUD();
 };
 
-//  tick();
+startButton.addEventListener("click", () => {
+  paused = false;
+  tick();
+  menu.style.opacity = 0;
+  menu.style.display = "none";
+});
