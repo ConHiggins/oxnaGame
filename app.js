@@ -34,6 +34,7 @@ let KeyA = false;
 
 body.addEventListener("mousedown", (e) => {
   const center = window.innerWidth * 0.5;
+  e.preventDefault();
   if (e.clientX > center) {
     KeyD = true;
   } else {
