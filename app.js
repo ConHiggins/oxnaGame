@@ -43,9 +43,7 @@ let boxCount = 0;
 window.addEventListener(
   "touchmove",
   (e) => {
-    if (e.scale !== 1) {
-      e.preventDefault();
-    }
+    e.preventDefault();
   },
   { passive: false }
 );
