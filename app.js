@@ -142,14 +142,15 @@ const floatItemY = (item, target, speed) => {
 body.addEventListener("touchstart", (e) => {
   const centreX = window.innerWidth * 0.5;
   const centreY = gameCont.style.height * 0.5;
+  console.log(e.touches[0].clientX);
   //e.preventDefault();
-  if (game.jumpSp > -10 && e.pageY > centreY) {
+  if (game.jumpSp > -10 && e.touches[0].clientY > centreY) {
     game.jumpSp -= 2;
   }
   player.style.border = game.jumpSp * -0.1 + "px solid white";
-  if (e.pageX > centreX && e.pageY < centreY) {
+  if (e.touches[0].clientX > centreX) {
     KeyD = true;
-  } else {
+  } else if (e.touches[0].clientX < centreX) {
     KeyA = true;
   }
 });
