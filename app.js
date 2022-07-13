@@ -54,11 +54,8 @@ const addHazard = () => {
 };
 
 const removeHazards = () => {
-  for (let i = 0; i < boxCount; i++) {
-    floatingItems.innerHTML -= `<div class="box" id="box_${boxCount}"></div>`;
-    floatingItems.innerHTML -= `NaN`;
-  }
   boxCount = 0;
+  floatingItems.innerHTML = "";
 };
 
 const gameInit = () => {
