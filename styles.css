@@ -1,6 +1,11 @@
 @media screen and (min-width: 320px) {
   * {
     margin: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   .game-container {
     display: grid;
@@ -186,11 +191,6 @@
     left: 0;
     background: #015871;
     z-index: 50;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
   }
   .wave {
     background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x;
