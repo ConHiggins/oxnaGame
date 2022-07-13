@@ -179,7 +179,7 @@
     opacity: var(--op, 0);
   }
   .ocean {
-    height: 10%;
+    height: 25%;
     width: 100%;
     position: absolute;
     bottom: 0;
@@ -190,7 +190,7 @@
   .wave {
     background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x;
     position: absolute;
-    top: -128px;
+    top: -158px;
     width: 2400px;
     height: 198px;
     -webkit-animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
@@ -198,7 +198,7 @@
     transform: translate3d(0, 0, 0);
   }
   .wave:nth-of-type(2) {
-    top: -175px;
+    top: -155px;
     -webkit-animation: wave 4s cubic-bezier(0.36, 0.45, 0.53, 0.53) -0.125s infinite, swell 5s ease -1.25s infinite;
             animation: wave 4s cubic-bezier(0.36, 0.45, 0.53, 0.53) -0.125s infinite, swell 5s ease -1.25s infinite;
     opacity: 1;

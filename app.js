@@ -145,6 +145,10 @@ const floatItemY = (item, target, speed) => {
 body.addEventListener("touchstart", (e) => {
   const center = window.innerWidth * 0.5;
   e.preventDefault();
+  if (game.jumpSp > -10) {
+    game.jumpSp -= 2;
+  }
+  player.style.border = game.jumpSp * -0.1 + "px solid white";
   if (e.pageX > center) {
     KeyD = true;
   } else {
@@ -155,6 +159,12 @@ body.addEventListener("touchstart", (e) => {
 body.addEventListener("touchend", (e) => {
   KeyA = false;
   KeyD = false;
+  if (game.jumpSp < -25) {
+    game.jumpSp = -25;
+  }
+  playerJump(game.jumpSp);
+  player.style.border = 0 + "px solid white";
+  game.jumpSp = -8;
 });
 
 document.addEventListener("keydown", (event) => {
