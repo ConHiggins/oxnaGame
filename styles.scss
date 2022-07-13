@@ -132,7 +132,7 @@
 
 .floating-items {
 
-    grid-row: 5;
+    grid-row: 6;
 }
 
  .box {
@@ -235,10 +235,18 @@ body {
   left:0;
   background: #015871;
   z-index: 50;
+  
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .wave {
   background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x; 
+  
   position: absolute;
   top: -158px;
   width: 2400px;

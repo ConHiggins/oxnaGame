@@ -143,13 +143,14 @@ const floatItemY = (item, target, speed) => {
 /////////Controls/////////////////////////////////////////////////////////////////////
 
 body.addEventListener("touchstart", (e) => {
-  const center = window.innerWidth * 0.5;
-  e.preventDefault();
-  if (game.jumpSp > -10) {
+  const centreX = window.innerWidth * 0.5;
+  const centreY = gameCont.style.height * 0.5;
+  //e.preventDefault();
+  if (game.jumpSp > -10 && e.pageY > centreY) {
     game.jumpSp -= 2;
   }
   player.style.border = game.jumpSp * -0.1 + "px solid white";
-  if (e.pageX > center) {
+  if (e.pageX > centreX && e.pageY < centreY) {
     KeyD = true;
   } else {
     KeyA = true;
