@@ -158,6 +158,7 @@ body.addEventListener("touchstart", (e) => {
 });
 
 body.addEventListener("touchend", (e) => {
+  e.preventDefault();
   KeyA = false;
   KeyD = false;
   if (game.jumpSp < -25) {
