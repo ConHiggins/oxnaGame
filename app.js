@@ -38,6 +38,18 @@ const gameCont = document.querySelector(".game-container");
 const points = document.querySelector(".points");
 let boxCount = 0;
 
+///Disable default browser mobile touch controls
+
+window.addEventListener(
+  "touchmove",
+  (e) => {
+    if (e.scale !== 1) {
+      e.preventDefault();
+    }
+  },
+  { passive: false }
+);
+
 const addHazard = () => {
   boxCount += 1;
   floatingItems.innerHTML += `<div class="box" id="box_${boxCount}"></div>`;
