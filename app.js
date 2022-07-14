@@ -25,7 +25,6 @@ import {
   game,
 } from "./initVars.js";
 
-export let Game = {};
 let paused = false;
 let day = true;
 let reset = false;
@@ -88,20 +87,24 @@ const getRandomInt = (max) => {
 ///////////////////////////////////////////////////
 const dropStars = (arr) => {
   for (let i = 0; i < arr.length; i++) {
+    const hitBottom =
+      arr[i].style.top.substring(0, arr[i].style.top.length - 2) >
+      body.offsetHeight;
+
     if (boxCollision(player, arr[i])) {
       arr[i].style.opacity = 0;
       scoreAdd();
     }
     if (
       ////Collected or reaches bottom of screen
-      arr[i].style.top.substring(0, arr[i].style.top.length - 2) >
-        body.offsetHeight ||
+      hitBottom ||
       boxCollision(player, arr[i])
     ) {
       arr[i].style.top = getRandomInt(20) + "px";
       arr[i].style.left = getRandomInt(body.offsetWidth) + "px";
       arr[i].style.opacity = 1;
     }
+
     arr[i].style.webkitTransform =
       "rotate(" +
       arr[i].style.top.substring(0, arr[i].style.top.length - 2) * 0.2 +

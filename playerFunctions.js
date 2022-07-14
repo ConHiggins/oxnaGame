@@ -28,7 +28,7 @@ const stayOnscreen = (xAccel, yAccel) => {
 
   ////Limit player to on-screen
   if (
-    (playerX <= player.offsetWidth * 0.5 && xAccel != 0) ||
+    (playerX <= 0 && xAccel < 0) ||
     (playerX >= body.offsetWidth - player.offsetWidth && xAccel > 0)
   ) {
     return (game.xVel *= -1);
