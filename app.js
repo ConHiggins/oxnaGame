@@ -12,15 +12,16 @@ import { collisionCorrection, boxCollision } from "./collisions.js";
 import {
   HUD,
   player,
+  highscoreDisplay,
   body,
-  ground,
   grav,
   wave,
   ocean,
   floatingItems,
-  shark,
   stars,
   menu,
+  tag,
+  taglines,
   startButton,
   game,
 } from "./initVars.js";
@@ -32,10 +33,15 @@ let score = 0;
 let multiplier = 1;
 let KeyD = false;
 let KeyA = false;
+let highscores = [];
 
 const gameCont = document.querySelector(".game-container");
 const points = document.querySelector(".points");
 let boxCount = 0;
+///////////////////////////////////////////////////
+const getRandomInt = (max) => {
+  return Math.floor(Math.random() * max);
+};
 
 ///Disable default browser mobile touch controls
 
@@ -61,7 +67,13 @@ const gameInit = () => {
   paused = true;
   menu.style.opacity = 1;
   menu.style.display = "block";
+  tag.innerText = taglines[getRandomInt(taglines.length - 1)];
   removeHazards();
+  highscores = highscores.sort((a, b) => b - a);
+  if (highscores.length > 0) {
+    highscores = highscores.splice(0, 1);
+    highscoreDisplay.innerText = `High score: ${highscores[0]}`;
+  }
   game.xVel = 0;
   game.yVel = 0;
   game.hsp = body.offsetWidth * 0.5;
@@ -80,10 +92,7 @@ gameInit();
 const showHUD = () => {
   HUD.innerText = `Score: ${score}`;
 };
-///////////////////////////////////////////////////
-const getRandomInt = (max) => {
-  return Math.floor(Math.random() * max);
-};
+
 ///////////////////////////////////////////////////
 const dropStars = (arr) => {
   for (let i = 0; i < arr.length; i++) {
@@ -107,17 +116,24 @@ const dropStars = (arr) => {
 
     arr[i].style.webkitTransform =
       "rotate(" +
-      arr[i].style.top.substring(0, arr[i].style.top.length - 2) * 0.2 +
+      arr[i].style.top.substring(0, arr[i].style.top.length - 2) * 0.9 +
       "deg)";
     arr[i].style.top =
       Number(arr[i].style.top.substring(0, arr[i].style.top.length - 2)) +
-      2 +
+      Math.max(2, score * 0.05) +
       "px";
   }
 };
 ///////////////////////////////////////////////////
-////x-axis cosine movement function
+////x-axis cos movement function
 
+/**
+ * Lerp an item on the x axis around a target coordinate, and specify whether it should rotate
+//  * @param {Element} item
+//  * @param {Number} target
+//  * @param {Number} speed
+//  * @param {Boolean} rotate
+//  */
 const floatItemX = (item, target, speed, rotate) => {
   let orbitRadius = body.offsetWidth;
   let date, rot;
@@ -130,8 +146,14 @@ const floatItemX = (item, target, speed, rotate) => {
   return target + Math.cos(date) * orbitRadius + "px";
 };
 
-////y-axis cosine movement function
+////y-axis sin movement function
 
+/**
+ * Lerp an item on the y axis around a target coordinate
+//  * @param {Element} item
+//  * @param {Number} target
+//  * @param {Number} speed
+//  */
 const floatItemY = (item, target, speed) => {
   let orbitRadius = 50;
   let date;
@@ -151,6 +173,7 @@ body.addEventListener("touchstart", (e) => {
   }
   player.style.border = game.jumpSp * -0.1 + "px solid white";
   if (e.touches[0].clientX > centreX) {
+    //// Get X region of user thumb
     KeyD = true;
   } else if (e.touches[0].clientX < centreX) {
     KeyA = true;
@@ -173,6 +196,7 @@ document.addEventListener("keydown", (event) => {
     //Reset game
     case event.code == "KeyR":
       reset = true;
+      highscores.push(score);
       gameInit();
       break;
     //Move right
@@ -231,6 +255,10 @@ document.addEventListener("keyup", (event) => {
 const scoreAdd = () => {
   multiplier = 1 + Math.floor(score * 0.1);
   score += multiplier;
+  highscores = highscores.sort((a, b) => b - a);
+  if (score > highscores[0]) {
+    highscores.push(score);
+  }
   points.style.color = "#ffe571";
   points.style.opacity = 1;
   points.style.left = game.hsp + "px";
@@ -252,6 +280,7 @@ const scoreDeplete = () => {
 };
 
 const boxControl = () => {
+  /////Hazards movement and spawn //////////////////////////////////////////////////////////
   if (boxCount < 1 && score >= 10) {
     addHazard();
   }
@@ -322,19 +351,17 @@ const tick = () => {
     movePlayer(-0.5, 0);
   }
 
-  points.style.opacity *= 0.95;
-  gravity();
-  slowPlayer();
   if (boxCollision(player, ocean) || boxCollision(player, wave)) {
     underwater();
   } else {
     aboveWater();
   }
-
+  gravity();
+  slowPlayer();
   dropStars(stars);
   boxControl();
-
   showHUD();
+  points.style.opacity *= 0.95;
 };
 
 startButton.addEventListener("click", () => {

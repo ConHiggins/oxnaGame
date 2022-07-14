@@ -1,9 +1,4 @@
-player.style.position = "absolute";
-
 import { player, body, wave, game } from "./initVars.js";
-
-// import { collisionCorrection, boxCollision } from "./collisions.js";
-// import { gameInit } from "./app.js";
 
 export const underwater = () => {
   player.style.backgroundColor = "#1b3d3f";
@@ -70,7 +65,7 @@ export const collisionSetPlayer = (x, y) => {
 };
 ////////////////////////////////////////////////////////////////////////////////////////
 export const gravity = () => {
-  ///Limit on-screen
+  ///Limit on-screen and set buoyancy
   const yNumEnd = player.style.top.length - 2;
   const playerY = player.style.top.substring(0, yNumEnd);
 
@@ -92,6 +87,11 @@ export const gravity = () => {
   player.style.top = game.vsp + "px";
 };
 ////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * Limit player speed on both axis by setting velocity to max value if >=
+//  * @param {Number} vel
+//  * @param {Number} max
+//  */
 export const setSpeed = (vel, max) => {
   if (vel >= max) {
     return (vel = max);
@@ -108,6 +108,7 @@ export const limitSpeed = () => {
   setSpeed(game.yVel, yMaxSpd);
 };
 ////////////////////////////////////////////////////////////////////////////////////////
+///Air resistance / friction
 export const slowPlayer = () => {
   if (game.xVel != 0) {
     game.xVel *= 0.99;

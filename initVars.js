@@ -1,4 +1,5 @@
 export const HUD = document.querySelector(".HUD");
+
 export const player = document.querySelector(".player");
 export const ground = document.querySelector(".ground");
 
@@ -12,6 +13,7 @@ export const stars = Array.from(document.getElementsByClassName("star"));
 
 export const menu = document.querySelector(".menu");
 export const startButton = document.querySelector(".menu__start-button");
+export const highscoreDisplay = document.querySelector(".menu__highscore");
 player.style.position = "absolute";
 
 export const grav = body.offsetHeight * 0.00075;
@@ -23,3 +25,14 @@ export const game = {
   vsp: 0,
   jumpSp: 0,
 };
+
+export const tag = document.querySelector(".menu__tagline");
+export const taglines = [
+  "Almost definitely not a true story",
+  "Not a licenced swimming tutorial",
+  "Made in Unreal Engine 5",
+  "Wet Trampoline Simulator",
+  "Not a recommended substitute for cardio",
+  "Coming soon: BP Oil Spill DLC",
+  "Buoys in the Hood",
+];
