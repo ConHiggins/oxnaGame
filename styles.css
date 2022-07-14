@@ -40,6 +40,8 @@
     color: white;
     border: none;
     border-radius: 1rem;
+    letter-spacing: 0.5rem;
+    text-shadow: -2px 0 black, 0 2px black, 2px 0 black, 0 -2px black;
     transition: background-color 0.3s ease;
   }
   .menu__start-button:hover {

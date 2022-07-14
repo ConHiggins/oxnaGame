@@ -47,7 +47,7 @@ window.addEventListener(
   },
   { passive: false }
 );
-
+///////////////////////////////////////////////////
 const addHazard = () => {
   boxCount += 1;
   floatingItems.innerHTML += `<div class="box" id="box_${boxCount}"></div>`;
@@ -57,7 +57,7 @@ const removeHazards = () => {
   boxCount = 0;
   floatingItems.innerHTML = "";
 };
-
+///////////////////////////////////////////////////
 const gameInit = () => {
   paused = true;
   menu.style.opacity = 1;
@@ -77,15 +77,15 @@ const gameInit = () => {
 };
 
 gameInit();
-
+///////////////////////////////////////////////////
 const showHUD = () => {
   HUD.innerText = `Score: ${score}`;
 };
-
+///////////////////////////////////////////////////
 const getRandomInt = (max) => {
   return Math.floor(Math.random() * max);
 };
-
+///////////////////////////////////////////////////
 const dropStars = (arr) => {
   for (let i = 0; i < arr.length; i++) {
     if (boxCollision(player, arr[i])) {
@@ -93,6 +93,7 @@ const dropStars = (arr) => {
       scoreAdd();
     }
     if (
+      ////Collected or reaches bottom of screen
       arr[i].style.top.substring(0, arr[i].style.top.length - 2) >
         body.offsetHeight ||
       boxCollision(player, arr[i])
@@ -111,7 +112,7 @@ const dropStars = (arr) => {
       "px";
   }
 };
-
+///////////////////////////////////////////////////
 ////x-axis cosine movement function
 
 const floatItemX = (item, target, speed, rotate) => {
@@ -142,8 +143,6 @@ const floatItemY = (item, target, speed) => {
 body.addEventListener("touchstart", (e) => {
   const centreX = window.innerWidth * 0.5;
   const centreY = gameCont.style.height * 0.5;
-  console.log(e.touches[0].clientX);
-  //e.preventDefault();
   if (game.jumpSp > -10 && e.touches[0].clientY > centreY) {
     game.jumpSp -= 2;
   }
@@ -156,7 +155,6 @@ body.addEventListener("touchstart", (e) => {
 });
 
 body.addEventListener("touchend", (e) => {
-  //e.preventDefault();
   KeyA = false;
   KeyD = false;
   if (game.jumpSp < -25) {
@@ -169,16 +167,20 @@ body.addEventListener("touchend", (e) => {
 
 document.addEventListener("keydown", (event) => {
   switch (true) {
+    //Reset game
     case event.code == "KeyR":
       reset = true;
       gameInit();
       break;
+    //Move right
     case event.code == "KeyD" && paused == false:
       KeyD = true;
       break;
+    //Move left
     case event.code == "KeyA" && paused == false:
       KeyA = true;
       break;
+    //Jump
     case event.code == "Space":
       event.preventDefault();
     case event.code == "Space" && game.jumpSp > -10:
@@ -186,6 +188,7 @@ document.addEventListener("keydown", (event) => {
       game.jumpSp -= 2;
       player.style.border = game.jumpSp * -0.1 + "px solid white";
       break;
+    //Pause
     case event.code == "KeyP" && paused == false:
       paused = true;
       console.log(paused);
@@ -194,6 +197,7 @@ document.addEventListener("keydown", (event) => {
       paused = false;
       tick();
       break;
+    //Debug add hazard
     case event.code == "KeyL":
       addHazard();
   }
@@ -201,6 +205,7 @@ document.addEventListener("keydown", (event) => {
 
 document.addEventListener("keyup", (event) => {
   switch (true) {
+    ///Enact jump and reset
     case event.code == "Space" && paused == false:
       event.preventDefault();
       if (game.jumpSp < -25) {
@@ -210,6 +215,7 @@ document.addEventListener("keyup", (event) => {
       player.style.border = 0 + "px solid white";
       game.jumpSp = -8;
       break;
+    //Set movement to false
     case event.code == "KeyD":
       KeyD = false;
       break;
@@ -222,10 +228,24 @@ document.addEventListener("keyup", (event) => {
 const scoreAdd = () => {
   multiplier = 1 + Math.floor(score * 0.1);
   score += multiplier;
+  points.style.color = "#ffe571";
   points.style.opacity = 1;
   points.style.left = game.hsp + "px";
   points.style.top = game.vsp + "px";
   points.innerText = `+${multiplier}`;
+};
+
+const scoreDeplete = () => {
+  multiplier = 1 + Math.floor(score * 0.1);
+  score -= multiplier * 5;
+  points.style.color = "#c93510";
+  points.style.opacity = 1;
+  points.style.left = game.hsp + "px";
+  points.style.top = game.vsp + "px";
+  points.innerText = `-${multiplier * 5}`;
+  if (score <= 0) {
+    gameInit();
+  }
 };
 
 const boxControl = () => {
@@ -244,7 +264,9 @@ const boxControl = () => {
     box_1.style.left = floatItemX(box_1, body.offsetWidth * 0.5, 0.0004, true);
     box_1.style.top = floatItemY(box_1, body.offsetHeight * 0.475, 0.002);
     if (boxCollision(player, box_1)) {
-      gameInit();
+      game.xVel *= -2;
+      game.yVel *= -2;
+      scoreDeplete();
     }
   }
 
@@ -253,7 +275,9 @@ const boxControl = () => {
     box_2.style.left = floatItemX(box_2, body.offsetWidth * 0.5, 0.0003, true);
     box_2.style.top = floatItemY(box_2, body.offsetHeight * 0.475, 0.003);
     if (boxCollision(player, box_2)) {
-      gameInit();
+      game.xVel *= -2;
+      game.yVel *= -2;
+      scoreDeplete();
     }
   }
   if (boxCount > 2) {
@@ -261,7 +285,9 @@ const boxControl = () => {
     box_3.style.left = floatItemX(box_3, body.offsetWidth * 0.5, 0.0002, true);
     box_3.style.top = floatItemY(box_3, body.offsetHeight * 0.475, 0.006);
     if (boxCollision(player, box_3)) {
-      gameInit();
+      game.xVel *= -2;
+      game.yVel *= -2;
+      scoreDeplete();
     }
   }
 };
